@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for asset Cmgr'
+define service ZUI_C_ASSET_CMGR {
+  expose ZASSET_C_LIST_CMGR as Asset;
+}

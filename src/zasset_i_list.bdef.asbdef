@@ -1,0 +1,16 @@
+managed; // implementation in class zbp_asset_i_list unique;
+
+define behavior for zasset_i_list alias asset
+persistent table ZASSET_H
+//lock master
+//authorization master ( instance )
+etag master last_changed_at
+lock master
+{
+
+  mapping for ZASSET_H corresponding;
+
+  create;
+  update;
+  delete;
+}
