@@ -1,6 +1,6 @@
 projection;
 
-define behavior for ZASSET_C_LIST_PGMGR //alias <alias_name>
+define behavior for ZASSET_C_LIST_PGMGR alias AssetPgmgr
 {
   use create;
   use update;
@@ -9,4 +9,6 @@ define behavior for ZASSET_C_LIST_PGMGR //alias <alias_name>
   //use action createAssetByTemplate;
   use action acceptAsset;
   use action rejectAsset;
+
+  field ( readonly ) AssetID, AssetName, AssetPortalLink, AssetType, Audience, Campaign, ContentManager, Description, Market, sku, SubAudience, Theme,ReadyDate;
 }

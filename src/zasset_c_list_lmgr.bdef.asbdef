@@ -1,0 +1,6 @@
+projection;
+
+define behavior for ZASSET_C_LIST_LMGR alias AssetLmgr
+{
+
+}
