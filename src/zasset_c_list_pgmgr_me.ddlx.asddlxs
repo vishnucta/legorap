@@ -1,19 +1,19 @@
 @Metadata.layer: #PARTNER
-annotate view ZASSET_C_LIST_CMGR with
+annotate view ZASSET_C_LIST_PGMGR with
 {
   @UI.facet: [ { id:              'Asset',
                  purpose:         #STANDARD,
                  type:            #IDENTIFICATION_REFERENCE,
                  label:           'Travel',
                  position:        10 } ]
-                 
+
   @UI: {
-      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' },{ type: #FOR_ACTION, dataAction: 'createAssetByTemplate', label: 'Create Asset by Template' } ],
+      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' }],
       identification: [ { position: 10, label: 'Asset ID [AIDXXXXX]' } ] }
   @Search.defaultSearchElement: true
   AssetID;
   @UI: {
-           lineItem:       [ { position: 20, importance: #HIGH, label: 'Asset Name' } ],
+           lineItem:       [ { position: 20, importance: #HIGH, label: 'Asset Name' },{ type: #FOR_ACTION, dataAction: 'rejectAsset', label: 'Reject Asset' } ],
            identification: [ { position: 20, label: 'Asset Name' } ] }
   @Search.defaultSearchElement: true
   AssetName;
@@ -26,6 +26,10 @@ annotate view ZASSET_C_LIST_CMGR with
         lineItem:       [ { position: 60, importance: #HIGH, label: 'Production Status' }],
       identification: [ { position: 60, label: '[D(Done)|N(Not Done)|I(In Progress)]' } ]  }
   ProductionStatus;
+//  @UI: {
+//        lineItem:       [ { position: 61, importance: #HIGH, label: 'Overall Status' }]
+//       }
+//  OverallStatus;
   @UI.identification: [ { position: 70, label: 'Description' } ]
   Description;
   @UI: {

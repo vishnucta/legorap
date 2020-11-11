@@ -1,5 +1,5 @@
 @Metadata.layer: #PARTNER
-annotate view ZASSET_C_LIST_CMGR with
+annotate view ZASSET_C_LIST_LMGR with
 {
   @UI.facet: [ { id:              'Asset',
                  purpose:         #STANDARD,
@@ -8,7 +8,7 @@ annotate view ZASSET_C_LIST_CMGR with
                  position:        10 } ]
                  
   @UI: {
-      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' },{ type: #FOR_ACTION, dataAction: 'createAssetByTemplate', label: 'Create Asset by Template' } ],
+      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' }],
       identification: [ { position: 10, label: 'Asset ID [AIDXXXXX]' } ] }
   @Search.defaultSearchElement: true
   AssetID;

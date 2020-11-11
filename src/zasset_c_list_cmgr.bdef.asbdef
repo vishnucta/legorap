@@ -8,5 +8,7 @@ use etag
   use update;
   use delete;
 
-  use action createAssetByTemplate;
+  //use action createAssetByTemplate;
+
+
 }

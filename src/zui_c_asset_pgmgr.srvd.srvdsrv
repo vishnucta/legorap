@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for asset PGMgr'
+define service ZUI_C_ASSET_PGMGR {
+  expose ZASSET_C_LIST_PGMGR as Asset;
+}
