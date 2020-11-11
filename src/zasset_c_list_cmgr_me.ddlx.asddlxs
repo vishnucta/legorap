@@ -17,8 +17,8 @@ annotate view ZASSET_C_LIST_CMGR with
   @Search.defaultSearchElement: true
   AssetName;
   @UI: {
-             lineItem:       [ { position: 30, importance: #LOW, label: 'Asset Link' } ],
-             identification: [ { position: 30, label: 'Asset Link' } ] }
+             lineItem:       [ { type:#WITH_URL,position: 30, importance: #LOW, label: 'Asset Link',url: 'AssetPortalLink' } ],
+             identification: [ { type:#WITH_URL,position: 30, label: 'Asset Link',url: 'AssetPortalLink' } ] }
   @Search.defaultSearchElement: false
   AssetPortalLink;
   @UI: {
