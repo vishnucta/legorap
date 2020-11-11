@@ -6,8 +6,9 @@ annotate view ZASSET_C_LIST_CMGR with
                  type:            #IDENTIFICATION_REFERENCE,
                  label:           'Travel',
                  position:        10 } ]
+                 
   @UI: {
-      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' } ],
+      lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' },{ type: #FOR_ACTION, dataAction: 'createAssetByTemplate', label: 'Create Asset by Template' } ],
       identification: [ { position: 10, label: 'Asset ID [abc123,...,ABC123]' } ] }
   @Search.defaultSearchElement: true
   AssetID;

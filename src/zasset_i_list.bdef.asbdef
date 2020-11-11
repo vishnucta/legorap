@@ -1,6 +1,7 @@
-managed; // implementation in class zbp_asset_i_list unique;
+managed;
 
 define behavior for zasset_i_list alias asset
+implementation in class zbp_asset_i_list unique
 persistent table ZASSET_H
 //lock master
 //authorization master ( instance )
@@ -13,4 +14,7 @@ lock master
   create;
   update;
   delete;
+
+  // instance action for copying travel instances
+  action createAssetByTemplate result [1] $self;
 }

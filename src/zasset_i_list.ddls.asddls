@@ -1,3 +1,23 @@
+//-----------------------------------------------------------------------*
+//* View Name     : ZASSET_I_LIST
+//* Title         : Interface View for Asset Management
+//* Create Date   : 10-Nov-2020
+//* Release       : ABAP Platform 1908 (755)
+//* Author        : Vishnu P/vishnucta@gmail.com(p1940421247)
+//*----------------------------------------------------------------------*
+//* Description   : Interface View for Asset Management
+//*
+//*
+//*
+//*-----------------------------------------------------------------------*
+//* CHANGE HISTORY
+//*-----------------------------------------------------------------------*
+//*Date        | User ID      |Description                   |Change Label *
+//*-----------------------------------------------------------------------*
+//* 10-Nov-2020|p1940421247   | Initial                      |             *
+//*            |              |                              |             *
+//*            |              |                              |             *
+//*-----------------------------------------------------------------------*
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Asset List'
 define root view entity zasset_i_list
