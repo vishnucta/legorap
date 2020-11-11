@@ -5,12 +5,16 @@ CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS copy_asset FOR MODIFY IMPORTING keys FOR ACTION asset~createAssetByTemplate RESULT result.
     METHODS set_production_accept FOR MODIFY IMPORTING keys FOR ACTION asset~acceptAsset RESULT result.
     METHODS set_production_denied FOR MODIFY IMPORTING keys FOR ACTION asset~rejectAsset RESULT result.
+
     ...
 
 ENDCLASS.
 
 CLASS lhc_asset IMPLEMENTATION.
   ...
+
+
+
   METHOD set_production_accept.
 
   ENDMETHOD.
@@ -70,13 +74,7 @@ CLASS lhc_asset IMPLEMENTATION.
     DATA(lv_today) = cl_abap_context_info=>get_system_date( ).
 
     DATA lt_create TYPE TABLE FOR CREATE zasset_i_list\\asset.
-*    DATA : lw_guid TYPE string.
 
-*    CALL FUNCTION 'GENERAL_GET_RANDOM_STRING'
-*      EXPORTING
-*        number_chars  = 32
-*      IMPORTING
-*        random_string = lw_guid.
 
     lt_create = VALUE #( FOR row IN  lt_read_result INDEX INTO idx
                              ( asset_id      = 'Sample ID'

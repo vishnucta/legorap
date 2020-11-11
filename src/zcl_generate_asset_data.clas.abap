@@ -24,7 +24,7 @@ CLASS zcl_generate_asset_data DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-  INTERFACES if_oo_adt_classrun.
+    INTERFACES if_oo_adt_classrun.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -33,11 +33,24 @@ ENDCLASS.
 
 CLASS zcl_generate_asset_data IMPLEMENTATION.
 
-METHOD if_oo_adt_classrun~main.
+  METHOD if_oo_adt_classrun~main.
 
     DATA itab TYPE TABLE OF zasset_h.
+    DATA itab_market TYPE TABLE OF zmarket_t.
 
-*   fill internal travel table (itab)
+*   fill internal market table
+*    itab_market = VALUE #(
+*      ( marketname = 'Europe' )
+*      ( marketname = 'APAC' )
+*      ( marketname = 'MENA' )
+*      ( marketname = 'Local')
+*      ( marketname = 'US')
+*      ).
+*    DELETE FROM zasset_h.
+*    INSERT zmarket_t FROM TABLE @itab_market.
+
+
+*   fill internal asset table
     itab = VALUE #(
       ( asset_id = 'AID13201' asset_link = 'https://developers.sap.com/' asset_name = 'XYZ Poster' ready_date = '20190624' asset_type = 'Image' theme = 'Duplo' sku =  60705 campaign = 'Latest Campaign'
         description = 'mv' production_status = 'I' audience = 'Kids' sub_audience = 'Boys' market = 'Global' cont_mgr = 'John Doe' )
@@ -57,6 +70,6 @@ METHOD if_oo_adt_classrun~main.
     out->write( |{ sy-dbcnt } Asset entries inserted successfully!| ).
 
 
-ENDMETHOD.
+  ENDMETHOD.
 
 ENDCLASS.

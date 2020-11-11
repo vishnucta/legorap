@@ -23,10 +23,10 @@
 define root view entity zasset_i_list
   as select from zasset_h as Asset
 
-  /* Associations */
+ 
 
 {
-       //key mykey,
+       
   key  asset_id,
        asset_link,
        asset_name,
@@ -52,5 +52,8 @@ define root view entity zasset_i_list
        //@Semantics.systemDateTime.lastChangedAt: true
        @Semantics.systemDateTime.localInstanceLastChangedAt: true
        last_changed_at
+       
+       /* Associations */
+       
 
 }
