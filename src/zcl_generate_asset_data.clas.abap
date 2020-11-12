@@ -15,7 +15,7 @@
 *//*-----------------------------------------------------------------------*
 *//*Date       | User ID      |Description                   |Change Label *
 *//*-----------------------------------------------------------------------*
-*//*10-Nov-2020| p1940421247       | Initial                      |             *
+*//*10-Nov-2020| p1940421247       | Initial                      |        *
 *//*-----------------------------------------------------------------------*
 
 CLASS zcl_generate_asset_data DEFINITION
@@ -34,6 +34,8 @@ ENDCLASS.
 CLASS zcl_generate_asset_data IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
+
+*Contain logic to populate Asset,Market and Status Table
 
     DATA itab TYPE TABLE OF zasset_h.
     DATA itab_stat TYPE TABLE OF ZPRODSTAT_T.

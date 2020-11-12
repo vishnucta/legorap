@@ -36,7 +36,7 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZASSET_CM</ARBGB>
      <MSGNR>005</MSGNR>
-     <TEXT>AID should be continued with a numerc length of 5</TEXT>
+     <TEXT>AID should be suffixed with a numeric value</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>

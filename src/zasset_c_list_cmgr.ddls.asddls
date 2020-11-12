@@ -1,3 +1,25 @@
+//-----------------------------------------------------------------------*
+//* View Name     : ZASSET_C_LIST_CMGR
+//* Title         : Consumption/Projection View for Content Manager 
+//* Create Date   : 11-Nov-2020
+//* Release       : ABAP Platform 1809 (754)
+//* Author        : Vishnu P/vishnucta@gmail.com(p1940421247)
+//*----------------------------------------------------------------------*
+//* Description   : Consumption/Projection View for Content Manager
+//*
+//*
+//*
+//*-----------------------------------------------------------------------*
+//* CHANGE HISTORY
+//*-----------------------------------------------------------------------*
+//*Date        | User ID      |Description                   |Change Label *
+//*-----------------------------------------------------------------------*
+//* 11-Nov-2020|p1940421247   | Initial                      |             *
+//*            |              |                              |             *
+//*            |              |                              |             *
+//*-----------------------------------------------------------------------*
+
+
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Projection View for Content Manager'
 @UI: {

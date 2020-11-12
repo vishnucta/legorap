@@ -1,3 +1,23 @@
+*//&----------------------------------------------------------------------*
+*//& ABAP Class Name    lhc_asset,lcl_save
+*//&----------------------------------------------------------------------*
+*//-----------------------------------------------------------------------*
+*//* Class         : lhc_asset,lcl_save
+*//* Title         : Local Class part of Behavior Implementation
+*//* Create Date   : 10-Nov-2020
+*//* Release       : ABAP Platform 1908 (755)
+*//* Author        : Vishnu P/vishnucta@gmail.com(p1940421247)
+*//* TR            :
+*//*----------------------------------------------------------------------*
+*//* Description   : Local Class part of Behavior Implementation
+*//*-----------------------------------------------------------------------*
+*//* CHANGE HISTORY
+*//*-----------------------------------------------------------------------*
+*//*Date       | User ID      |Description                   |Change Label *
+*//*-----------------------------------------------------------------------*
+*//*10-Nov-2020| p1940421247       | Initial                      |        *
+*//*-----------------------------------------------------------------------*
+
 CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
   PUBLIC SECTION.
@@ -18,6 +38,8 @@ ENDCLASS.
 
 CLASS lhc_asset IMPLEMENTATION.
   ...
+
+  "Feature control Implementation for Action
   METHOD get_features.
     "%control-<fieldname> specifies which fields are read from the entities
 
@@ -27,14 +49,14 @@ CLASS lhc_asset IMPLEMENTATION.
                                                         ) )
                                 RESULT DATA(lt_asset_result).
 
-
+    "Return that controls the feature %features-%action-<action name>
     result = VALUE #( FOR ls_asset IN lt_asset_result
                        ( %key                           = ls_asset-%key
                          %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'A'
                                                                     THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
                       ) ).
   ENDMETHOD.
-
+  "Handler method for data validation
   METHOD validate_ready_date.
     " (1) Read relevant asset instance data
     READ ENTITIES OF zasset_i_list IN LOCAL MODE
@@ -58,7 +80,7 @@ CLASS lhc_asset IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
   ENDMETHOD.
-
+  " Handler Method for Asset validation
   METHOD validate_asset.
 
     DATA lv_numpart TYPE i.
@@ -74,14 +96,14 @@ CLASS lhc_asset IMPLEMENTATION.
     RESULT DATA(lt_asset).
 
 
-    " (2) Raise msg for Invalid asset id , name and link
+    " (2) Raise msg for Invalid asset id , name and link and validate the Asset ID Format
     LOOP AT lt_asset INTO DATA(ls_asset).
 
 
       IF ls_asset-asset_id IS NOT INITIAL.
-
+        "Extraction of character from Asset ID
         lv_charpart = ls_asset-asset_id+0(3).
-
+        " If Asset ID  doesnt have first 3 Character as AID
         IF lv_charpart NE 'AID'.
           APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
           APPEND VALUE #(  asset_id = ls_asset-asset_id
@@ -92,10 +114,12 @@ CLASS lhc_asset IMPLEMENTATION.
                            %element-asset_id = if_abap_behv=>mk-on )
             TO reported-asset.
         ENDIF.
+
+        "Try catch statement while type casting from String to Integer
         TRY.
             lv_numpart = ls_asset-asset_id+3(5).
           CATCH cx_root INTO oref.
-
+            "If typecasting fails trigger a user error
             APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
             APPEND VALUE #(  asset_id = ls_asset-asset_id
                              %msg = new_message( id        = 'ZASSET_CM'
@@ -106,6 +130,8 @@ CLASS lhc_asset IMPLEMENTATION.
               TO reported-asset.
         ENDTRY.
       ENDIF.
+
+      "If User enters Empty Asset ID
       IF ls_asset-asset_id IS INITIAL.
 
         APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
@@ -116,6 +142,7 @@ CLASS lhc_asset IMPLEMENTATION.
                                              severity  = if_abap_behv_message=>severity-error )
                          %element-asset_id = if_abap_behv=>mk-on )
           TO reported-asset.
+        "If user enters empty Asset Name
       ELSEIF ls_asset-asset_name IS INITIAL.
         APPEND VALUE #(  asset_id = ls_asset-asset_name ) TO failed-asset.
         APPEND VALUE #(  asset_id = ls_asset-asset_name
@@ -125,6 +152,7 @@ CLASS lhc_asset IMPLEMENTATION.
                                              severity  = if_abap_behv_message=>severity-error )
                          %element-asset_name = if_abap_behv=>mk-on )
           TO reported-asset.
+        "If User enters empty Asset Link
       ELSEIF ls_asset-asset_link IS INITIAL.
         APPEND VALUE #(  asset_id = ls_asset-asset_link ) TO failed-asset.
         APPEND VALUE #(  asset_id = ls_asset-asset_link
@@ -145,6 +173,7 @@ CLASS lhc_asset IMPLEMENTATION.
 
   ENDMETHOD.
 
+  "Method the Archive the confidential Assets
   METHOD set_production_denied.
 
 
@@ -182,11 +211,10 @@ CLASS lhc_asset IMPLEMENTATION.
                                               ) ).
 
   ENDMETHOD.
-
+  "Handler method for Copying the Asset for template creation . Disable for now in Behavior
   METHOD copy_asset.
 
-
-
+    "Read the entity in Local mode a get the current instance of BO
     READ ENTITIES OF zasset_i_list IN LOCAL MODE
       ENTITY asset
          FIELDS ( asset_id
@@ -208,7 +236,7 @@ CLASS lhc_asset IMPLEMENTATION.
                                production_status    = row-production_status
                                 ) ). " Open
 
-
+    "Create the template value to the persistence table
     MODIFY ENTITIES OF zasset_i_list IN LOCAL MODE
         ENTITY asset
            CREATE FIELDS (    asset_id
@@ -231,6 +259,7 @@ CLASS lhc_asset IMPLEMENTATION.
 
 ENDCLASS.
 
+"Local Template Class which can be used for Managed Save Option
 CLASS lcl_save DEFINITION INHERITING FROM cl_abap_behavior_saver.
 
   PROTECTED SECTION.
@@ -244,17 +273,17 @@ CLASS lcl_save IMPLEMENTATION.
   METHOD save_modified.
 
     " (1) Get instance data of all instances that have been created
-    IF create-asset IS NOT INITIAL.
+    "IF create-asset IS NOT INITIAL.
 
 
-    ENDIF.
+    "ENDIF.
 
-    IF update-asset IS NOT INITIAL.
-      LOOP AT update-asset ASSIGNING FIELD-SYMBOL(<fs_asset>).
-
-      ENDLOOP..
-
-    ENDIF.
+*    IF update-asset IS NOT INITIAL.
+*      LOOP AT update-asset ASSIGNING FIELD-SYMBOL(<fs_asset>).
+*
+*      ENDLOOP..
+*
+*    ENDIF.
   ENDMETHOD.
 
 ENDCLASS.
