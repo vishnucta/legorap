@@ -1,5 +1,9 @@
 CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
+  PUBLIC SECTION.
+    CLASS-DATA:
+                 oref   TYPE REF TO cx_root .
+
   PRIVATE SECTION.
 
     METHODS copy_asset FOR MODIFY IMPORTING keys FOR ACTION asset~createAssetByTemplate RESULT result.
@@ -14,8 +18,8 @@ ENDCLASS.
 
 CLASS lhc_asset IMPLEMENTATION.
   ...
-METHOD get_features.
-"%control-<fieldname> specifies which fields are read from the entities
+  METHOD get_features.
+    "%control-<fieldname> specifies which fields are read from the entities
 
     READ ENTITY zasset_i_list FROM VALUE #( FOR keyval IN keys
                                                       (  %key                    = keyval-%key
@@ -29,7 +33,7 @@ METHOD get_features.
                          %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'A'
                                                                     THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
                       ) ).
-ENDMETHOD.
+  ENDMETHOD.
 
   METHOD validate_ready_date.
     " (1) Read relevant asset instance data
@@ -41,7 +45,7 @@ ENDMETHOD.
 
     " (2) Raise msg for past ready date
     LOOP AT lt_asset INTO DATA(ls_asset).
-      IF ls_asset-ready_date < cl_abap_context_info=>get_system_date( ).
+      IF ls_asset-ready_date < cl_abap_context_info=>get_system_date( ) AND ls_asset-ready_date IS NOT INITIAL.
 
         APPEND VALUE #(  asset_id = ls_asset-ready_date ) TO failed-asset.
         APPEND VALUE #(  asset_id = ls_asset-ready_date
@@ -56,6 +60,12 @@ ENDMETHOD.
   ENDMETHOD.
 
   METHOD validate_asset.
+
+    DATA lv_numpart TYPE i.
+    DATA lv_charpart(3) TYPE c.
+
+
+
     " (1) Read relevant asset instance data
     READ ENTITIES OF zasset_i_list IN LOCAL MODE
     ENTITY asset
@@ -66,6 +76,36 @@ ENDMETHOD.
 
     " (2) Raise msg for Invalid asset id , name and link
     LOOP AT lt_asset INTO DATA(ls_asset).
+
+
+      IF ls_asset-asset_id IS NOT INITIAL.
+
+        lv_charpart = ls_asset-asset_id+0(3).
+
+        IF lv_charpart NE 'AID'.
+          APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
+          APPEND VALUE #(  asset_id = ls_asset-asset_id
+                           %msg = new_message( id        = 'ZASSET_CM'
+                                               number    = '006'
+                                               v1        = ls_asset-asset_id
+                                               severity  = if_abap_behv_message=>severity-error )
+                           %element-asset_id = if_abap_behv=>mk-on )
+            TO reported-asset.
+        ENDIF.
+        TRY.
+            lv_numpart = ls_asset-asset_id+3(5).
+          CATCH cx_root INTO oref.
+
+            APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
+            APPEND VALUE #(  asset_id = ls_asset-asset_id
+                             %msg = new_message( id        = 'ZASSET_CM'
+                                                 number    = '005'
+                                                 v1        = ls_asset-asset_id
+                                                 severity  = if_abap_behv_message=>severity-error )
+                             %element-asset_id = if_abap_behv=>mk-on )
+              TO reported-asset.
+        ENDTRY.
+      ENDIF.
       IF ls_asset-asset_id IS INITIAL.
 
         APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
@@ -145,7 +185,7 @@ ENDMETHOD.
 
   METHOD copy_asset.
 
-    SELECT MAX( asset_id ) FROM zasset_h INTO @DATA(lv_asset_id).
+
 
     READ ENTITIES OF zasset_i_list IN LOCAL MODE
       ENTITY asset
@@ -163,7 +203,7 @@ ENDMETHOD.
 
 
     lt_create = VALUE #( FOR row IN  lt_read_result INDEX INTO idx
-                             ( asset_id      = 'Sample ID'
+                             ( asset_id      = row-asset_id
                                asset_name      = row-asset_name
                                production_status    = row-production_status
                                 ) ). " Open

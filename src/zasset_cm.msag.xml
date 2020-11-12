@@ -32,6 +32,18 @@
      <MSGNR>004</MSGNR>
      <TEXT>Ready date cannot be in the past</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZASSET_CM</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>AID should be continued with a numerc length of 5</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZASSET_CM</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>First 3 Character should be AID</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>
