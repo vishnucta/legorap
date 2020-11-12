@@ -5,7 +5,8 @@ CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS copy_asset FOR MODIFY IMPORTING keys FOR ACTION asset~createAssetByTemplate RESULT result.
     METHODS set_production_accept FOR MODIFY IMPORTING keys FOR ACTION asset~acceptAsset RESULT result.
     METHODS set_production_denied FOR MODIFY IMPORTING keys FOR ACTION asset~rejectAsset RESULT result.
-
+    METHODS validate_asset FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateAsset.
+    METHODS validate_ready_date FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateReadyDate.
     ...
 
 ENDCLASS.
@@ -13,6 +14,74 @@ ENDCLASS.
 CLASS lhc_asset IMPLEMENTATION.
   ...
 
+  METHOD validate_ready_date.
+    " (1) Read relevant asset instance data
+    READ ENTITIES OF zasset_i_list IN LOCAL MODE
+    ENTITY asset
+     FIELDS ( asset_id ready_date )
+     WITH CORRESPONDING #(  keys )
+    RESULT DATA(lt_asset).
+
+    " (2) Raise msg for past ready date
+    LOOP AT lt_asset INTO DATA(ls_asset).
+      IF ls_asset-ready_date < cl_abap_context_info=>get_system_date( ).
+
+        APPEND VALUE #(  asset_id = ls_asset-ready_date ) TO failed-asset.
+        APPEND VALUE #(  asset_id = ls_asset-ready_date
+                         %msg = new_message( id        = 'ZASSET_CM'
+                                             number    = '004'
+                                             v1        = ls_asset-ready_date
+                                             severity  = if_abap_behv_message=>severity-error )
+                         %element-ready_date = if_abap_behv=>mk-on )
+          TO reported-asset.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD validate_asset.
+    " (1) Read relevant asset instance data
+    READ ENTITIES OF zasset_i_list IN LOCAL MODE
+    ENTITY asset
+     FIELDS ( asset_id asset_name )
+     WITH CORRESPONDING #(  keys )
+    RESULT DATA(lt_asset).
+
+
+    " (2) Raise msg for Invalid asset id , name and link
+    LOOP AT lt_asset INTO DATA(ls_asset).
+      IF ls_asset-asset_id IS INITIAL.
+
+        APPEND VALUE #(  asset_id = ls_asset-asset_id ) TO failed-asset.
+        APPEND VALUE #(  asset_id = ls_asset-asset_id
+                         %msg = new_message( id        = 'ZASSET_CM'
+                                             number    = '001'
+                                             v1        = ls_asset-asset_id
+                                             severity  = if_abap_behv_message=>severity-error )
+                         %element-asset_id = if_abap_behv=>mk-on )
+          TO reported-asset.
+      ELSEIF ls_asset-asset_name IS INITIAL.
+        APPEND VALUE #(  asset_id = ls_asset-asset_name ) TO failed-asset.
+        APPEND VALUE #(  asset_id = ls_asset-asset_name
+                         %msg = new_message( id        = 'ZASSET_CM'
+                                             number    = '002'
+                                             v1        = ls_asset-asset_name
+                                             severity  = if_abap_behv_message=>severity-error )
+                         %element-asset_name = if_abap_behv=>mk-on )
+          TO reported-asset.
+      ELSEIF ls_asset-asset_link IS INITIAL.
+        APPEND VALUE #(  asset_id = ls_asset-asset_link ) TO failed-asset.
+        APPEND VALUE #(  asset_id = ls_asset-asset_link
+                         %msg = new_message( id        = 'ZASSET_CM'
+                                             number    = '003'
+                                             v1        = ls_asset-asset_link
+                                             severity  = if_abap_behv_message=>severity-error )
+                         %element-asset_link = if_abap_behv=>mk-on )
+          TO reported-asset.
+      ENDIF.
+    ENDLOOP.
+
+
+  ENDMETHOD.
 
 
   METHOD set_production_accept.

@@ -16,7 +16,7 @@ lock master
   update;
   delete;
 
-  field ( mandatory ) asset_id, asset_name,production_status;
+  field ( mandatory ) asset_id, asset_name, asset_link,production_status;
   //field ( features : instance ) asset_id,production_status;
 
   // instance action for copying asset instances
@@ -26,6 +26,7 @@ lock master
   action acceptAsset result [1] $self;
   action rejectAsset result [1] $self;
 
-
+  validation validateAsset on save { field asset_id,asset_name,asset_link; }
+  validation validateReadyDate on save { field asset_id,ready_date; }
 
 }
