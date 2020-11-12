@@ -7,12 +7,29 @@ CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS set_production_denied FOR MODIFY IMPORTING keys FOR ACTION asset~rejectAsset RESULT result.
     METHODS validate_asset FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateAsset.
     METHODS validate_ready_date FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateReadyDate.
+    METHODS get_features FOR FEATURES IMPORTING keys REQUEST    requested_features FOR asset    RESULT result.
     ...
 
 ENDCLASS.
 
 CLASS lhc_asset IMPLEMENTATION.
   ...
+METHOD get_features.
+"%control-<fieldname> specifies which fields are read from the entities
+
+    READ ENTITY zasset_i_list FROM VALUE #( FOR keyval IN keys
+                                                      (  %key                    = keyval-%key
+                                                         %control-production_status = if_abap_behv=>mk-on
+                                                        ) )
+                                RESULT DATA(lt_asset_result).
+
+
+    result = VALUE #( FOR ls_asset IN lt_asset_result
+                       ( %key                           = ls_asset-%key
+                         %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'A'
+                                                                    THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+                      ) ).
+ENDMETHOD.
 
   METHOD validate_ready_date.
     " (1) Read relevant asset instance data

@@ -36,7 +36,8 @@ CLASS zcl_generate_asset_data IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
 
     DATA itab TYPE TABLE OF zasset_h.
-    DATA itab_market TYPE TABLE OF zmarket_t.
+    DATA itab_stat TYPE TABLE OF ZPRODSTAT_T.
+*    DATA itab_market TYPE TABLE OF zmarket_t.
 
 *   fill internal market table
 *    itab_market = VALUE #(
@@ -49,6 +50,19 @@ CLASS zcl_generate_asset_data IMPLEMENTATION.
 *    DELETE FROM zasset_h.
 *    INSERT zmarket_t FROM TABLE @itab_market.
 
+
+*   fill internal Status table
+    itab_stat = VALUE #(
+      ( production_status = 'D' status_name = 'Done')
+      ( production_status = 'N' status_name = 'Not Started')
+      ( production_status = 'A' status_name = 'Archived' )
+      ( production_status = 'I' status_name = 'In Progress')
+      ( production_status = 'C' status_name = 'Confidential')
+      ).
+    DELETE FROM ZPRODSTAT_T.
+    INSERT ZPRODSTAT_T FROM TABLE @itab_stat.
+*   output the result as a console message
+    out->write( |{ sy-dbcnt }  entries inserted successfully!| ).
 
 *   fill internal asset table
     itab = VALUE #(
@@ -67,7 +81,7 @@ CLASS zcl_generate_asset_data IMPLEMENTATION.
     INSERT zasset_h FROM TABLE @itab.
 
 *   output the result as a console message
-    out->write( |{ sy-dbcnt } Asset entries inserted successfully!| ).
+*    out->write( |{ sy-dbcnt }  entries inserted successfully!| ).
 
 
   ENDMETHOD.

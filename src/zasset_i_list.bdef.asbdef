@@ -22,9 +22,13 @@ lock master
   // instance action for copying asset instances
   action createAssetByTemplate result [1] $self;
 
+
+
+  // instance action and dynamic action control
+  action ( features : instance ) rejectAsset result [1] $self;
   // instance actions
   action acceptAsset result [1] $self;
-  action rejectAsset result [1] $self;
+  //action rejectAsset result [1] $self;
 
   validation validateAsset on save { field asset_id,asset_name,asset_link; }
   validation validateReadyDate on save { field asset_id,ready_date; }

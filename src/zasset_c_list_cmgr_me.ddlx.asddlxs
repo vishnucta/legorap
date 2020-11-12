@@ -10,7 +10,9 @@ annotate view ZASSET_C_LIST_CMGR with
   @UI: {
       lineItem:       [ { position: 10, importance: #HIGH, label: 'Asset ID' },{ type: #FOR_ACTION, dataAction: 'createAssetByTemplate', label: 'Create Asset by Template' } ],
       identification: [ { position: 10, label: 'Asset ID [AIDXXXXX]' } ] }
-  @Search.defaultSearchElement: true
+  @Search.defaultSearchElement: true 
+  @UI.selectionField: [{position: 10}]
+  @Consumption.valueHelpDefinition: [{entity: {name: 'ZASSET_I_VH', element: 'AssetID' }}]
   AssetID;
   @UI: {
            lineItem:       [ { position: 20, importance: #HIGH, label: 'Asset Name' } ],

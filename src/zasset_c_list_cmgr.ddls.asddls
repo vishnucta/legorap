@@ -10,8 +10,8 @@ define root view entity ZASSET_C_LIST_CMGR
 {
 
 
-
-
+       
+       @ObjectModel.text.element: ['AssetName']
   key  asset_id          as AssetID,
 
 

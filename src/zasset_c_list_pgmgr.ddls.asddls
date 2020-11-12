@@ -23,7 +23,7 @@ define root view entity ZASSET_C_LIST_PGMGR
 
        production_status as ProductionStatus,
 
-       //overall_status as OverallStatus,
+      
        description       as Description,
 
        ready_date        as ReadyDate,

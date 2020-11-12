@@ -2,9 +2,9 @@ projection;
 
 define behavior for ZASSET_C_LIST_PGMGR alias AssetPgmgr
 {
-  use create;
-  use update;
-  use delete;
+  //use create;
+  //use update;
+  //use delete;
 
   //use action createAssetByTemplate;
   use action acceptAsset;
