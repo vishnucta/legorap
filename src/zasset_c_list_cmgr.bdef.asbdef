@@ -25,12 +25,13 @@ projection;
 define behavior for ZASSET_C_LIST_CMGR alias AssetCmgr
 use etag
 {
-//field ( readonly ) AssetID;
+
+// standard operations for asset entity
   use create;
   use update;
   use delete;
 
-  //use action createAssetByTemplate;
+
 
 
 }

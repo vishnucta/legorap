@@ -52,8 +52,10 @@ CLASS lhc_asset IMPLEMENTATION.
     "Return that controls the feature %features-%action-<action name>
     result = VALUE #( FOR ls_asset IN lt_asset_result
                        ( %key                           = ls_asset-%key
+                       %field-asset_id               = if_abap_behv=>fc-f-read_only
                          %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'A'
                                                                     THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+                         "%features-%update = if_abap_behv=>fc-o-disabled
                       ) ).
   ENDMETHOD.
   "Handler method for data validation

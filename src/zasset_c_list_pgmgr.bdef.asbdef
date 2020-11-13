@@ -26,9 +26,10 @@ projection;
 define behavior for ZASSET_C_LIST_PGMGR alias AssetPgmgr
 {
 
-  //use action createAssetByTemplate;
+  // instance actions
   use action acceptAsset;
   use action rejectAsset;
 
+ // static field control
   field ( readonly ) AssetID, AssetName, AssetPortalLink, AssetType, Audience, Campaign, ContentManager, Description, Market, sku, SubAudience, Theme,ReadyDate;
 }
