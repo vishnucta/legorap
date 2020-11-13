@@ -48,6 +48,7 @@ annotate view ZASSET_C_LIST_CMGR with
   @UI: {
         lineItem:       [ { position: 60, importance: #HIGH, label: 'Production Status' }],
       identification: [ { position: 60, label: '[D(Done)|N(Not Done)|I(In Progress)]' } ]  }
+      @Consumption.valueHelpDefinition: [{ entity : {name: 'ZPRODSTAT_I_VH', element: 'ProdStatus'  } }]
   ProductionStatus;
   @UI.identification: [ { position: 70, label: 'Description' } ]
   Description;

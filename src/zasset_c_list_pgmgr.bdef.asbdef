@@ -27,7 +27,7 @@ define behavior for ZASSET_C_LIST_PGMGR alias AssetPgmgr
 {
 
   // instance actions
-  use action acceptAsset;
+  use action revertAsset;
   use action rejectAsset;
 
  // static field control

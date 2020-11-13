@@ -6,7 +6,7 @@
 *//* Title         : Class to generate data for Asset table
 *//* Create Date   : 10-Nov-2020
 *//* Release       : ABAP Platform 1908 (755)
-*//* Author        : Vishnu P/vishnucta@gmail.com(p1940421247)
+*//* Author        : Vishnu P/ vishnucta@gmail.com(p1940421247)
 *//* TR            :
 *//*----------------------------------------------------------------------*
 *//* Description   : Class to generate data for Asset table
@@ -38,7 +38,7 @@ CLASS zcl_generate_asset_data IMPLEMENTATION.
 *Contain logic to populate Asset,Market and Status Table
 
     DATA itab TYPE TABLE OF zasset_h.
-    DATA itab_stat TYPE TABLE OF ZPRODSTAT_T.
+*    DATA itab_stat TYPE TABLE OF ZPRODSTAT_T.
 *    DATA itab_market TYPE TABLE OF zmarket_t.
 
 *   fill internal market table
@@ -54,15 +54,16 @@ CLASS zcl_generate_asset_data IMPLEMENTATION.
 
 
 *   fill internal Status table
-    itab_stat = VALUE #(
-      ( production_status = 'D' status_name = 'Done')
-      ( production_status = 'N' status_name = 'Not Started')
-      ( production_status = 'A' status_name = 'Archived' )
-      ( production_status = 'I' status_name = 'In Progress')
-      ( production_status = 'C' status_name = 'Confidential')
-      ).
-    DELETE FROM ZPRODSTAT_T.
-    INSERT ZPRODSTAT_T FROM TABLE @itab_stat.
+*    itab_stat = VALUE #(
+*      ( production_status = 'D' status_name = 'Done')
+*      ( production_status = 'N' status_name = 'Not Started')
+*      ( production_status = 'A' status_name = 'Archived' )
+*      ( production_status = 'I' status_name = 'In Progress')
+*      ( production_status = 'C' status_name = 'Confidential')
+*      ).
+*    DELETE FROM ZPRODSTAT_T.
+*    INSERT ZPRODSTAT_T FROM TABLE @itab_stat.
+
 *   output the result as a console message
     out->write( |{ sy-dbcnt }  entries inserted successfully!| ).
 

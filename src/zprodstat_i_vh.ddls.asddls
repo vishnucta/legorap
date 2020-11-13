@@ -28,6 +28,7 @@
 
 @Search.searchable: true
 
+
 // Use of DB DD07T isnt permitted , cannot access domain ZPRODSTATUS
 
 define view ZPRODSTAT_I_VH

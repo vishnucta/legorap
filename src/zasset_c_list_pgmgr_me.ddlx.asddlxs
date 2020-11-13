@@ -40,7 +40,7 @@ annotate view ZASSET_C_LIST_PGMGR with
   @Search.defaultSearchElement: true
   AssetName;
   @UI: {
-             lineItem:       [ { type:#WITH_URL,position: 30, importance: #LOW, label: 'Asset Link',url: 'AssetPortalLink' } ],
+             lineItem:       [ { type:#WITH_URL,position: 30, importance: #LOW, label: 'Asset Link',url: 'AssetPortalLink' },{ type: #FOR_ACTION, dataAction: 'revertAsset', label: 'Revert Asset' } ],
              identification: [ { type:#WITH_URL,position: 30, label: 'Asset Link',url: 'AssetPortalLink' } ] }
   @Search.defaultSearchElement: false
   AssetPortalLink;

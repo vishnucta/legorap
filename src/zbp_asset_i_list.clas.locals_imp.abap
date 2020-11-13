@@ -27,7 +27,7 @@ CLASS lhc_asset DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
     METHODS copy_asset FOR MODIFY IMPORTING keys FOR ACTION asset~createAssetByTemplate RESULT result.
-    METHODS set_production_accept FOR MODIFY IMPORTING keys FOR ACTION asset~acceptAsset RESULT result.
+    METHODS set_production_accept FOR MODIFY IMPORTING keys FOR ACTION asset~revertAsset RESULT result.
     METHODS set_production_denied FOR MODIFY IMPORTING keys FOR ACTION asset~rejectAsset RESULT result.
     METHODS validate_asset FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateAsset.
     METHODS validate_ready_date FOR VALIDATE ON SAVE IMPORTING keys FOR asset~validateReadyDate.
@@ -52,10 +52,13 @@ CLASS lhc_asset IMPLEMENTATION.
     "Return that controls the feature %features-%action-<action name>
     result = VALUE #( FOR ls_asset IN lt_asset_result
                        ( %key                           = ls_asset-%key
-                       %field-asset_id               = if_abap_behv=>fc-f-read_only
-                         %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'A'
-                                                                    THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
-                         "%features-%update = if_abap_behv=>fc-o-disabled
+                         %field-asset_id               = if_abap_behv=>fc-f-read_only
+                         %features-%action-rejectAsset = COND #( WHEN ls_asset-production_status = 'C'
+                                                                 THEN if_abap_behv=>fc-o-enabled
+                                                                 ELSE if_abap_behv=>fc-o-disabled   )
+                         %features-%action-revertAsset = COND #( WHEN ls_asset-production_status = 'A'
+                                                                 THEN if_abap_behv=>fc-o-enabled
+                                                                 ELSE if_abap_behv=>fc-o-disabled   )
                       ) ).
   ENDMETHOD.
   "Handler method for data validation
@@ -173,6 +176,36 @@ CLASS lhc_asset IMPLEMENTATION.
 
   METHOD set_production_accept.
 
+    " Modify in local mode
+    MODIFY ENTITIES OF zasset_i_list IN LOCAL MODE
+           ENTITY asset
+              UPDATE FROM VALUE #( FOR key IN keys ( asset_id = key-asset_id
+                                                     production_status = 'C' " Confidential
+                                                     %control-production_status = if_abap_behv=>mk-on ) )
+           FAILED   failed
+           REPORTED reported.
+
+    " Read changed data for action result
+    READ ENTITIES OF zasset_i_list IN LOCAL MODE
+         ENTITY asset
+         FROM VALUE #( FOR key IN keys (  asset_id = key-asset_id
+                                          %control = VALUE #(
+                                            asset_id       = if_abap_behv=>mk-on
+                                            asset_link     = if_abap_behv=>mk-on
+                                            asset_name      = if_abap_behv=>mk-on
+                                            asset_type        = if_abap_behv=>mk-on
+                                            audience     = if_abap_behv=>mk-on
+
+                                            campaign   = if_abap_behv=>mk-on
+                                            cont_mgr  = if_abap_behv=>mk-on
+                                            description     = if_abap_behv=>mk-on
+
+                                          ) ) )
+         RESULT DATA(lt_asset).
+
+    result = VALUE #( FOR asset IN lt_asset ( asset_id = asset-asset_id
+                                                %param    = asset
+                                              ) ).
   ENDMETHOD.
 
   "Method the Archive the confidential Assets

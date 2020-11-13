@@ -24,12 +24,13 @@ define root view entity zasset_i_list
   as select from zasset_h as Asset
 
  
-
+association [0..1] to ZPRODSTAT_I_VH    as _prodStat   on $projection.production_status = _prodStat.ProdStatus
 {
        
   key  asset_id,
        asset_link,
        asset_name,
+       
        production_status,
        description,
        ready_date,
@@ -51,9 +52,9 @@ define root view entity zasset_i_list
        last_changed_by,
        //@Semantics.systemDateTime.lastChangedAt: true
        @Semantics.systemDateTime.localInstanceLastChangedAt: true
-       last_changed_at
+       last_changed_at,
        
        /* Associations */
-       
+       _prodStat
 
 }

@@ -3,7 +3,8 @@
 {
 "FROM":
 [
-"ZASSET_I_LIST"
+"ZASSET_I_LIST",
+"ZPRODSTAT_I_VH"
 ],
 "ASSOCIATED":
 [],
