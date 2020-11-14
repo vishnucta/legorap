@@ -82,6 +82,16 @@ It briefly defines the scope of business logic to be implemented.
 
 
 
+# Expected UX 
+### Content Manager Role
+
+
+### Product Group Manager Role
+
+
+### Local Market Manager Role
+
+
 
 
 For any queries, reachout to me at vishnucta@gmail.com
