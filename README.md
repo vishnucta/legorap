@@ -41,6 +41,8 @@ Select all aritifacts in below listed folder(mass activation within a folder) an
 5) Just to avoid any unexpected error, just make sure all artifacts are activated in its respective folders.
 
 6) Publish the service Binding and preview the App from the Root BO/View
+    ![Preview](https://github.com/vishnucta/vishnucta/blob/main/preview.JPG)
+
 
 7) Run ABAP class ZCL_GENERATE_ASSET_DATA(Make sure classes are active too) to populate table zmarket_t(Market Value Help) and ZPRODSTAT_T (Status Value Help)
 
