@@ -43,7 +43,7 @@ Ready to run :+1:
 ### Common and easy fix errors : 
 - Missing Value help(ME View activation)
 - No data in Value Help (Run the Data generation class ZCL_GENERATE_ASSET_DATA)
-- Unable publish service binding (Activate in bottom up fashion starting with data element ending with service definition)
+- Unable to publish service binding (Activate in bottom up fashion starting with data element ending with service definition)
 - Stuck with some TR issues or unable to delete (Add transport manager view in Eclipse and manage your task and TR appropriately )
 - Always import into a clean package to avoid confusion
 
