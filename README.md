@@ -1,6 +1,5 @@
 # legorap
 
-Description
 This repository contains code for Asset Management system using  ABAP RESTful Application Programming Model (RAP) in SAP Cloud Platform, ABAP environment.
 
 Hello Team,
