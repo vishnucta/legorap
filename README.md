@@ -87,24 +87,24 @@ It briefly defines the scope of business logic to be implemented.
 
     <b>Screen 1 : <b>
 
-      ![Cmgr1](https://github.com/vishnucta/vishnucta/blob/main/cmgr%20scr1.JPG)  
+   ![Cmgr1](https://github.com/vishnucta/vishnucta/blob/main/cmgr%20scr1.JPG)  
 
     <b>Screen 2 : <b>
 
-       ![Cmgr1](https://github.com/vishnucta/vishnucta/blob/main/cmgr%20scr2.JPG)  
+   ![Cmgr1](https://github.com/vishnucta/vishnucta/blob/main/cmgr%20scr2.JPG)  
 
 
 ### Product Group Manager Role
     
     <b>Screen 1 : <b>
 
-      ![pgmgr1](https://github.com/vishnucta/vishnucta/blob/main/pgmgr%20scr1.JPG)  
+   ![pgmgr1](https://github.com/vishnucta/vishnucta/blob/main/pgmgr%20scr1.JPG)  
 
 ### Local Market Manager Role
 
     <b>Screen 1 : <b>
 
-      ![pgmgr1](https://github.com/vishnucta/vishnucta/blob/main/Lmmgr%20scr1.JPG)  
+   ![pgmgr1](https://github.com/vishnucta/vishnucta/blob/main/Lmmgr%20scr1.JPG)  
 
 
 For any queries, reachout to me at vishnucta@gmail.com
