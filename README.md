@@ -35,6 +35,7 @@ Select all aritifacts in below listed folder and activate folder by folder
 
 7) Run ABAP class ZCL_GENERATE_ASSET_DATA(Make sure classes are active too) to populate table zmarket_t(Market Value Help) and ZPRODSTAT_T (Status Value Help)
 
+8) Alternatively you can search for a package ZLCASE(ready to run App) in ABAP cloud environment.
 
 
 Ready to run :+1:
