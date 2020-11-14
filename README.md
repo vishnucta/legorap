@@ -14,9 +14,13 @@ Steps to Run :
 1) Configure ABAP Cloud Platform in your personal Eclipse IDE 
     https://developers.sap.com/tutorials/abap-environment-trial-onboarding.html
     
-2) Clone your project into your Custom Package(Total 53 Artifacts)
+2) Search for a package ZLCASE(ready to run App) in ABAP cloud environment<b> (There are few chances of not finding the package because of distributed instance for trial cloud    infrastructure).
+    
+    If Package not found , do the below steps
+    
+    Clone your project into your Custom Package(Total 53 Artifacts)
 
-    Some times even though the log shows 53 , only less files get imported into package
+    Some times even though the log shows 53 , only less files get imported into package. Inference is already files are available in system and locked to a request.
 
     ![Import Log](https://github.com/vishnucta/vishnucta/blob/main/Importlog.JPG)
 
@@ -40,7 +44,7 @@ Select all aritifacts in below listed folder and activate folder by folder
 
 7) Run ABAP class ZCL_GENERATE_ASSET_DATA(Make sure classes are active too) to populate table zmarket_t(Market Value Help) and ZPRODSTAT_T (Status Value Help)
 
-8) <b>Alternatively you can search for a package ZLCASE(ready to run App) in ABAP cloud environment<b> (There are few chances of not finding the package because of distributed instance for trial cloud infrastructure).
+
 
 
 Ready to run :+1:
