@@ -4,6 +4,7 @@
 
 This repository contains code for Asset Management system using  ABAP RESTful Application Programming Model (RAP) in SAP Cloud Platform, ABAP environment.
 
+
 Hello Team,
 
 Welcome the Usecase start up guide.
@@ -35,18 +36,50 @@ Select all aritifacts in below listed folder and activate folder by folder
 
 7) Run ABAP class ZCL_GENERATE_ASSET_DATA(Make sure classes are active too) to populate table zmarket_t(Market Value Help) and ZPRODSTAT_T (Status Value Help)
 
-8) Alternatively you can search for a package ZLCASE(ready to run App) in ABAP cloud environment.
+8) <b>Alternatively you can search for a package ZLCASE(ready to run App) in ABAP cloud environment<b>.
 
 
 Ready to run :+1:
 
 
 ### Common and easy fix errors : 
-- Missing Value help(ME View activation)
+- Missing Value help/Smart Filter in List Report(ME View activation) , just cross check after publishing the Service Binding
 - No data in Value Help (Run the Data generation class ZCL_GENERATE_ASSET_DATA)
 - Unable to publish service binding (Activate in bottom up fashion starting with data element ending with service definition)
 - Stuck with some TR issues or unable to delete (Add transport manager view in Eclipse and manage your task and TR appropriately )
 - Always import into a clean package to avoid confusion
+
+
+# Technical Design
+
+## Behavior
+It briefly defines the scope of business logic to be implemented.
+
+### Content Manager Role
+
+| Entity | Behavior |
+| --- | --- |
+| Asset | Operations:<br> <ul><li>Create, update, delete</li></ul><br>Validations:<ul><li>alidate editable input fields</li></ul> <br>Feature Control:<br><ul><li>Static and dynamic field control</li></ul> |
+
+
+### Product Group Manager Role
+
+| Entity | Behavior |
+| --- | --- |
+| Asset | Operations:<br> <ul><li>Action: Archive Asset</li></ul><ul><li>Action: Revert Asset</li></ul><br>Feature Control:<br><ul><li>Dynamic action control</li></ul> |
+
+
+### Local Market Manager Role
+
+| Entity | Behavior |
+| --- | --- |
+| Asset |Read operations only |
+
+
+
+
+
+
 
 
 For any queries, reachout to me at vishnucta@gmail.com
