@@ -34,3 +34,10 @@ Select all aritifacts in below listed folder and activate folder by folder
 6) Publish the service Binding and preview the App from the Root BO/View
 
 7) Run ABAP class ZCL_GENERATE_ASSET_DATA(Make sure classes are active too) to populate table zmarket_t(Market Value Help) and ZPRODSTAT_T (Status Value Help)
+
+
+
+Ready to run :+1:
+
+For any queries, reachout to me at vishnucta@gmail.com
+
