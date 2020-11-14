@@ -1,4 +1,4 @@
-# Asset Management Fiori App
+# Asset Management Fiori App using Restful ABAP Programming Model
 
 ## Description
 
