@@ -16,6 +16,10 @@ Steps to Run :
     
 2) Clone your project into your Custom Package(Total 53 Artifacts)
 
+    Some times even though the log shows 53 , only less files get imported into package
+
+    ![Import Log](https://github.com/vishnucta/vishnucta/blob/main/Importlog.JPG)
+
 3) Do activation as per below order to avoid error. Due to some reason even though Mass activation list all aritifacts , it end up not activating all.
 Select all aritifacts in below listed folder and activate folder by folder
 
