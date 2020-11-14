@@ -76,7 +76,9 @@ It briefly defines the scope of business logic to be implemented.
 | Asset |Read operations only |
 
 
+## Projection Layer in Asset Scenario
 
+![Behavior Diagram](https://github.com/vishnucta/vishnucta/blob/main/Behavoir%20Figure.JPG)
 
 
 
