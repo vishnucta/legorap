@@ -14,7 +14,7 @@ Steps to Run :
 1) Configure ABAP Cloud Platform in your personal Eclipse IDE 
     https://developers.sap.com/tutorials/abap-environment-trial-onboarding.html
     
-2) Clone your project into your Custom Package
+2) Clone your project into your Custom Package(Total 53 Artifacts)
 
 3) Do activation as per below order to avoid error. Due to some reason even though Mass activation list all aritifacts , it end up not activating all.
 Select all aritifacts in below listed folder and activate folder by folder
