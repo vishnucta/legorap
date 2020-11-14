@@ -1,4 +1,37 @@
-implementation unmanaged ;
-define behavior for ZASSET_C_LIST_CMGR
-  {
-  }
+//-----------------------------------------------------------------------*
+//* View Name     : ZASSET_C_LIST_CMGR
+//* Title         : Behavior Definition on Projection View for Content Manager
+//* Create Date   : 11-Nov-2020
+//* Release       : ABAP Platform 1809 (754)
+//* Author        : Vishnu P/vishnucta@gmail.com(p1940421247)
+//*----------------------------------------------------------------------*
+//* Description   : Behavior Definition on Projection View for Content Manager
+//*
+//*
+//*
+//*-----------------------------------------------------------------------*
+//* CHANGE HISTORY
+//*-----------------------------------------------------------------------*
+//*Date        | User ID      |Description                   |Change Label *
+//*-----------------------------------------------------------------------*
+//* 11-Nov-2020|p1940421247   | Initial                      |             *
+//*            |              |                              |             *
+//*            |              |                              |             *
+//*-----------------------------------------------------------------------*
+
+
+projection;
+
+define behavior for ZASSET_C_LIST_CMGR alias AssetCmgr
+use etag
+{
+
+// standard operations for asset entity
+  use create;
+  use update;
+  use delete;
+
+
+
+
+}
